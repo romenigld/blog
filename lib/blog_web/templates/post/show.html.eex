@@ -1,1 +1,2 @@
-deu certo
+<%= @post.title %>
+<%= @post.description %>
