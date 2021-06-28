@@ -1,14 +1,14 @@
 defmodule BlogWeb.PostController do
   use BlogWeb, :controller
-  alias Blog.Posts.Post
+  alias Blog.{Posts, Posts.Post}
 
-  def index(conn, params) do
-    posts = Blog.Repo.all(Post)
+  def index(conn, _params) do
+    posts = Posts.list_posts()
     render(conn, "index.html", posts: posts, valor: 2)
   end
 
   def show(conn, %{"id" => id}) do
-    post = Blog.Repo.get!(Post, id)
+    post = Posts.get_post!(id)
     render(conn, "show.html", post: post)
   end
 
@@ -18,49 +18,40 @@ defmodule BlogWeb.PostController do
   end
 
   def edit(conn, %{"id" => id}) do
-    post = Blog.Repo.get(Blog.Posts.Post, id)
+    post = Posts.get_post!(id)
     changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
   def create(conn, %{"post" => post_params}) do
-    post =
-      Post.changeset(%Post{}, post_params)
-      |>Blog.Repo.insert()
-
-    case post do
+    case Posts.create_post(post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post criado com sucesso!")
         |> redirect(to: Routes.post_path(conn, :show, post))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def update(conn, %{"id" => id, "post" => post_params}) do
-    post = Blog.Repo.get(Blog.Posts.Post, id)
-    changeset = Blog.Posts.Post.changeset(post, post_params)
-
-    post = Blog.Repo.update(changeset)
-
-    case post do
+    case Posts.update_post(id, post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post atualizado com sucesso!")
         |> redirect(to: Routes.post_path(conn, :show, post))
+
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
   def delete(conn, %{"id" => id}) do
-    post = Blog.Repo.get!(Blog.Posts.Post, id)
-    Blog.Repo.delete!(post)
+    Posts.delete(id)
 
     conn
     |> put_flash(:info, "Post foi deletado!")
     |> redirect(to: Routes.post_path(conn, :index))
   end
-
 end
