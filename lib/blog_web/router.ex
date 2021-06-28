@@ -19,13 +19,14 @@ defmodule BlogWeb.Router do
   scope "/", BlogWeb do
     pipe_through :browser
 
-    get "/posts", PostController, :index
-    get "/posts/new", PostController, :new
-    post "/posts", PostController, :create
-    get "/posts/:id/edit", PostController, :edit
-    get "/posts/:id", PostController, :show
-    put "/posts/:id", PostController, :update
-    delete "/posts/:id", PostController, :delete
+    # get "/posts", PostController, :index
+    # get "/posts/new", PostController, :new
+    # post "/posts", PostController, :create
+    # get "/posts/:id/edit", PostController, :edit
+    # get "/posts/:id", PostController, :show
+    # put "/posts/:id", PostController, :update
+    # delete "/posts/:id", PostController, :delete
+    resources "/posts", PostController
 
     get "/", PageController, :index
   end
