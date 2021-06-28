@@ -19,7 +19,7 @@ defmodule BlogWeb.PostController do
 
   def edit(conn, %{"id" => id}) do
     post = Blog.Repo.get(Blog.Posts.Post, id)
-    changeset = Post.changeset(%Post{}, post)
+    changeset = Post.changeset(post)
     render(conn, "edit.html", post: post, changeset: changeset)
   end
 
@@ -40,7 +40,9 @@ defmodule BlogWeb.PostController do
 
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Blog.Repo.get(Blog.Posts.Post, id)
-    post = Blog.Repo.update!(post, post_params)
+    changeset = Blog.Posts.Post.changeset(post, post_params)
+
+    post = Blog.Repo.update(changeset)
 
     case post do
       {:ok, post} ->
