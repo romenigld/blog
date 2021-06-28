@@ -11,4 +11,9 @@ defmodule BlogWeb.PostController do
     post = Blog.Repo.get!(Post, id)
     render(conn, "show.html", post: post)
   end
+
+  def new(conn, params) do
+    IO.inspect conn.remote_ip
+    render(conn, "new.html")
+  end
 end
