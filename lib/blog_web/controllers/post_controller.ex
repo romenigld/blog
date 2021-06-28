@@ -13,7 +13,6 @@ defmodule BlogWeb.PostController do
   end
 
   def new(conn, params) do
-    IO.inspect conn.remote_ip
     render(conn, "new.html")
   end
 end
