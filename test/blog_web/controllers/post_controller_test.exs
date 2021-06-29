@@ -62,4 +62,11 @@ defmodule BlogWeb.PostControllerTest do
     conn = put(conn, Routes.post_path(conn, :update, post), post: %{title: nil, description: nil})
     assert html_response(conn, 200) =~ "campo obrigatório"
   end
+
+  test "delete post", %{conn: conn} do
+    {:ok, post} = Blog.Posts.create_post(@valid_post)
+    conn = delete(conn, Routes.post_path(conn, :delete, post))
+    assert redirected_to(conn) == Routes.post_path(conn, :index)
+    assert_error_sent 404, fn -> get(conn, Routes.post_path(conn, :show, post)) end
+  end
 end
