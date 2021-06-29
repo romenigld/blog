@@ -37,6 +37,7 @@ defmodule BlogWeb.PostController do
 
   def update(conn, %{"id" => id, "post" => post_params}) do
     post = Posts.get_post!(id)
+
     case Posts.update_post(post, post_params) do
       {:ok, post} ->
         conn

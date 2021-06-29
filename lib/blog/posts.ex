@@ -12,9 +12,9 @@ defmodule Blog.Posts do
   end
 
   def update_post(post, post_params) do
-      post
-      |> Post.changeset(post_params)
-      |> Repo.update()
+    post
+    |> Post.changeset(post_params)
+    |> Repo.update()
   end
 
   def delete(id) do
