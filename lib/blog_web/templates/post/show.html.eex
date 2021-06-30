@@ -14,3 +14,30 @@
     <% end %>
   </div>
 </div>
+
+
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s10">
+        <i class="material-icons prefix">mode_edit</i>
+        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+        <label for="icon_prefix2">Comentario</label>
+      </div>
+
+      <div class="input-field col s2">
+        <a class="waves-effect waves-light btn">button</a>
+      </div>
+    </div>
+  </form>
+</div>
+
+<ul class="collection">
+  <li class="collection-item avatar">
+    <i class="material-icons circle red">play_arrow</i>
+    <span class="title">Title</span>
+    <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil libero tempora dolore suscipit dignissimos? Quam reprehenderit harum voluptate ratione a iste quaerat. Adipisci, sapiente architecto distinctio temporibus eveniet odit assumenda?
+    </p>
+  </li>
+</ul>
