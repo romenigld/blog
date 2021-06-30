@@ -11,10 +11,15 @@ defmodule Blog.CommentsTest do
     @invalid_attrs %{content: nil}
 
     def comment_fixture(attrs \\ %{}) do
-      {:ok, comment} =
+      post = Blog.PostsTest.post_fixture()
+
+      att =
         attrs
-        |> Enum.into(@valid_attrs)
-        |> Comments.create_comment()
+          |> Enum.into(@valid_attrs)
+
+      {:ok, comment} =
+        post.id
+        |> Comments.create_comment(att)
 
       comment
     end
@@ -30,12 +35,16 @@ defmodule Blog.CommentsTest do
     end
 
     test "create_comment/1 with valid data creates a comment" do
-      assert {:ok, %Comment{} = comment} = Comments.create_comment(@valid_attrs)
+      post = Blog.PostsTest.post_fixture()
+
+      assert {:ok, %Comment{} = comment} = Comments.create_comment(post.id, @valid_attrs)
       assert comment.content == "some content"
     end
 
     test "create_comment/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Comments.create_comment(@invalid_attrs)
+      post = Blog.PostsTest.post_fixture()
+
+      assert {:error, %Ecto.Changeset{}} = Comments.create_comment(post.id, @invalid_attrs)
     end
 
     test "update_comment/2 with valid data updates the comment" do
