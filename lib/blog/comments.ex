@@ -49,9 +49,10 @@ defmodule Blog.Comments do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
-    %Comment{}
-    |> Comment.changeset(attrs)
+  def create_comment(post_id, attrs \\ %{}) do
+    Blog.Posts.get_post!(post_id)
+    |> Ecto.build_assoc(:comments)
+    |> change_comment(attrs)
     |> Repo.insert()
   end
 
