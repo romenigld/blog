@@ -10,9 +10,8 @@ import "../node_modules/materialize-css/dist/js/materialize";
 //
 // Import deps with the dep name or local files with a relative path, for example:
 //
-//     import {Socket} from "phoenix"
-//     import socket from "./socket"
-//
+import {Socket} from "phoenix"
+import socket from "./socket"
 import "phoenix_html"
 
 // Initialization of the Materialize Component - 'Floating Action Button'
