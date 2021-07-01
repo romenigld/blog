@@ -62,6 +62,11 @@ const createSocket = (post_id) => {
     .receive("ok", resp => { console.log("Joined successfully", resp) })
     .receive("error", resp => { console.log("Unable to join", resp) })
 
+  document.getElementById("btn-comentar").addEventListener("click", () => {
+    const content = document.getElementById("comentario").value
+    channel.push("comment:add", {content: content})
+    document.getElementById("comentario").value = ""
+  });
 }
 
 window.createSocket = createSocket

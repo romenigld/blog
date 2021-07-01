@@ -21,12 +21,12 @@
     <div class="row">
       <div class="input-field col s10">
         <i class="material-icons prefix">mode_edit</i>
-        <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
-        <label for="icon_prefix2">Comentario</label>
+        <textarea id="comentario" class="materialize-textarea"></textarea>
+        <label for="comentario">Digite o que você achou =D</label>
       </div>
 
       <div class="input-field col s2">
-        <a class="waves-effect waves-light btn">button</a>
+        <a class="waves-effect waves-light btn" id="btn-comentar">Comentar</a>
       </div>
     </div>
   </form>

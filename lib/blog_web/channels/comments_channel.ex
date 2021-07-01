@@ -6,7 +6,8 @@ defmodule BlogWeb.CommentsChannel do
     {:ok, %{comments: post.comments}, socket}
   end
 
-  def handle_in() do
+  def handle_in("comment:add", attrs, socket) do
+    IO.inspect("teste 1")
 
   end
 end
