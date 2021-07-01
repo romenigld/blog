@@ -33,13 +33,7 @@
 </div>
 
 <ul class="collection">
-  <li class="collection-item avatar">
-    <i class="material-icons circle red">play_arrow</i>
-    <span class="title">Title</span>
-    <p>
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nihil libero tempora dolore suscipit dignissimos? Quam reprehenderit harum voluptate ratione a iste quaerat. Adipisci, sapiente architecto distinctio temporibus eveniet odit assumenda?
-    </p>
-  </li>
+
 </ul>
 
 <script>
