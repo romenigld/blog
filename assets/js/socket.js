@@ -62,7 +62,11 @@ const createSocket = (post_id) => {
     .receive("ok", resp => {
       pegaComentarios(resp.comments)
     })
-    .receive("error", resp => { console.log("Unable to join", resp) })
+    .receive("error", resp => {
+      console.log("Unable to join", resp)
+    })
+
+  channel.on(`comments:${post_id}:new`, incluirComentario)
 
   document.getElementById("btn-comentar").addEventListener("click", () => {
     const content = document.getElementById("comentario").value
@@ -73,16 +77,25 @@ const createSocket = (post_id) => {
 
 function pegaComentarios(comentarios) {
   const listaDeComentarios = comentarios.map(comment => {
-    return `
-      <li class="collection-item avatar">
-        <i class="material-icons circle red">play_arrow</i>
-        <span class="title">Title</span>
-        <p>
-          ${comment.content}
-        </p>
-      </li>
-    `
+    return template(comment)
   })
   document.querySelector(".collection").innerHTML = listaDeComentarios.join('')
 }
+
+function incluirComentario(event) {
+  console.log(event.comment)
+  document.querySelector(".collection").innerHTML += template(event.comment)
+}
+function template(comment) {
+  return `
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>
+        ${comment.content}
+      </p>
+    </li>
+  `
+}
+
 window.createSocket = createSocket
