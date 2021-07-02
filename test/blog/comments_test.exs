@@ -15,7 +15,7 @@ defmodule Blog.CommentsTest do
 
       att =
         attrs
-          |> Enum.into(@valid_attrs)
+        |> Enum.into(@valid_attrs)
 
       {:ok, comment} =
         post.id
