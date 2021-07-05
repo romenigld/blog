@@ -12,6 +12,5 @@ defmodule Blog.Repo.Migrations.CreateUsers do
 
       timestamps()
     end
-
   end
 end

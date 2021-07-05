@@ -13,6 +13,7 @@ defmodule BlogWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
+
   # coveralls-ignore-stop
 
   scope "/", BlogWeb do
