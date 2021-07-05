@@ -13,7 +13,6 @@ defmodule BlogWeb.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
   # coveralls-ignore-stop
 
   scope "/", BlogWeb do
@@ -22,6 +21,13 @@ defmodule BlogWeb.Router do
     resources "/posts", PostController
 
     get "/", PageController, :index
+  end
+
+  scope "/auth", BlogWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.
