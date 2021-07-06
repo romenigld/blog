@@ -7,7 +7,7 @@ defmodule Blog.AccountsTest do
     alias Blog.Accounts.User
 
     @valid_attrs %{
-      email: "some email",
+      email: "some@email.com",
       first_name: "some first_name",
       image: "some image",
       last_name: "some last_name",
@@ -15,7 +15,7 @@ defmodule Blog.AccountsTest do
       token: "some token"
     }
     @update_attrs %{
-      email: "some updated email",
+      email: "some_updated@email.com",
       first_name: "some updated first_name",
       image: "some updated image",
       last_name: "some updated last_name",
@@ -23,7 +23,7 @@ defmodule Blog.AccountsTest do
       token: "some updated token"
     }
     @invalid_attrs %{
-      email: nil,
+      email: "some_invalid email.com",
       first_name: nil,
       image: nil,
       last_name: nil,
@@ -42,7 +42,7 @@ defmodule Blog.AccountsTest do
 
     test "list_users/0 returns all users" do
       user = user_fixture()
-      assert Accounts.list_users() |> Enum.count() == 2
+      assert Accounts.list_users() |> Enum.count() == 3
     end
 
     test "get_user!/1 returns the user with given id" do
@@ -52,7 +52,7 @@ defmodule Blog.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
-      assert user.email == "some email"
+      assert user.email == "some@email.com"
       assert user.first_name == "some first_name"
       assert user.image == "some image"
       assert user.last_name == "some last_name"
@@ -67,7 +67,7 @@ defmodule Blog.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
-      assert user.email == "some updated email"
+      assert user.email == "some_updated@email.com"
       assert user.first_name == "some updated first_name"
       assert user.image == "some updated image"
       assert user.last_name == "some updated last_name"
