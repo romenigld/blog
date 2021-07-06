@@ -12,7 +12,8 @@ defmodule BlogWeb.PostControllerTest do
   }
 
   defp fixture(:post) do
-    {:ok, post} = Blog.Posts.create_post(@valid_post)
+    user = Blog.Accounts.get_user!(1)
+    {:ok, post} = Blog.Posts.create_post(user, @valid_post)
     post
   end
 
@@ -39,16 +40,22 @@ defmodule BlogWeb.PostControllerTest do
     setup [:criar_post]
 
     test "listar todos os posts", %{conn: conn} do
+      user = Blog.Accounts.get_user!(1)
+      Blog.Posts.create_post(user, @valid_post)
       conn = get(conn, Routes.post_path(conn, :index))
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
     test "pegar um post por id", %{conn: conn, post: post} do
+      user = Blog.Accounts.get_user!(1)
+      {:ok, post } = Blog.Posts.create_post(user, @valid_post)
       conn = get(conn, Routes.post_path(conn, :show, post))
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
     test "entrar no formulário de alteração de posts", %{conn: conn, post: post} do
+      user = Blog.Accounts.get_user!(1)
+      {:ok, post } = Blog.Posts.create_post(user, @valid_post)
       conn = get(conn, Routes.post_path(conn, :edit, post))
       assert html_response(conn, 200) =~ "Editar Post"
     end
