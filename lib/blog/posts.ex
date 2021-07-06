@@ -7,10 +7,14 @@ defmodule Blog.Posts do
 
   def get_post_with_comments!(id), do: Repo.get!(Post, id) |> Repo.preload(:comments)
 
-  def create_post(attrs \\ %{}) do
-    %Post{}
+  def create_post(user, attrs \\ %{}) do
+    r =
+      user
+      |> Ecto.build_assoc(:posts)
     |> Post.changeset(attrs)
     |> Repo.insert()
+
+    IO.inspect r
   end
 
   def update_post(post, post_params) do

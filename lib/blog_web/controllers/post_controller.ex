@@ -24,7 +24,7 @@ defmodule BlogWeb.PostController do
   end
 
   def create(conn, %{"post" => post_params}) do
-    case Posts.create_post(post_params) do
+    case Posts.create_post(conn.assigns[:user], post_params) do
       {:ok, post} ->
         conn
         |> put_flash(:info, "Post criado com sucesso!")
