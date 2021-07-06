@@ -22,8 +22,12 @@ defmodule BlogWeb.PostControllerTest do
     assert html_response(conn, 200) =~ "Criar Post"
   end
 
-  test "criar um posts", %{conn: conn} do
-    conn = post(conn, Routes.post_path(conn, :create), post: @valid_post)
+  test "criar um post", %{conn: conn} do
+    conn =
+      conn
+      |> Plug.Test.init_test_session(user_id: 1)
+      |> post(Routes.post_path(conn, :create), post: @valid_post)
+
     assert %{id: id} = redirected_params(conn)
     assert redirected_to(conn) == Routes.post_path(conn, :show, id)
 
