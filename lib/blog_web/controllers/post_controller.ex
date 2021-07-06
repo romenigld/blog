@@ -5,7 +5,6 @@ defmodule BlogWeb.PostController do
   plug :check_owner when action in [:edit, :update, :delete]
   plug BlogWeb.Plug.RequireAuth when action in [:create, :new, :edit, :update, :delete]
 
-
   def check_owner(conn, _) do
     %{params: %{"id" => post_id}} = conn
 
