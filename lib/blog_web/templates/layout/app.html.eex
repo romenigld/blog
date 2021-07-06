@@ -22,10 +22,10 @@
                   <%= link "Posts", to: Routes.post_path(@conn, :index) %>
                 </li>
                 <li>
-                  <%= link "Log out", to: Routes.post_path(@conn, :index) %>
+                  <%= link "Log out", to: Routes.auth_path(@conn, :logout) %>
                 </li>
               <% else %>
-                <li><%= link "Logar", to: Routes.auth_path(@conn, :request) %></li>
+                <li><%= link "Logar", to: Routes.auth_path(@conn, :request, "google") %></li>
               <% end %>
 
 
