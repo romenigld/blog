@@ -31,9 +31,15 @@ config :ueberauth, Ueberauth,
     google: {Ueberauth.Strategy.Google, []}
   ]
 
+#  read client ID/secret from the environment variables in the compile time:
+# config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+#   client_id: System.get_env("GOOGLE_CLIENT_ID"),
+#   client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
+#  read client ID/secret from the environment variables in the run time:
 config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-  client_id: System.get_env("GOOGLE_CLIENT_ID"),
-  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+  client_id: {System, :get_env, ["GOOGLE_CLIENT_ID"]},
+  client_secret: {System, :get_env, ["GOOGLE_CLIENT_SECRET"]}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
