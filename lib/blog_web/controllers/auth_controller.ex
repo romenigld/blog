@@ -33,6 +33,6 @@ defmodule BlogWeb.AuthController do
         |> redirect(to: Routes.page_path(conn, :index))
     end
 
-    render(conn, "index.html")
+    # render(conn, "index.html")
   end
 end
