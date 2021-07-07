@@ -32,7 +32,5 @@ defmodule BlogWeb.AuthController do
         |> put_flash(:error, "Algo deu errado!")
         |> redirect(to: Routes.page_path(conn, :index))
     end
-
-    # render(conn, "index.html")
   end
 end
