@@ -11,18 +11,7 @@
   </head>
   <body>
     <header>
-        <nav>
-          <div class="nav-wrapper">
-            <a href="#" class="brand-logo">Meu Blog</a>
-            <ul id="nav-mobile" class="right hide-on-med-and-down">
-              <li><a href="#">Bem vindo!! ALUNO</a></li>
-              <li><a href="#">Postar</a></li>
-              <li>
-                <%= link "Posts", to: Routes.post_path(@conn, :index) %>
-              </li>
-            </ul>
-          </div>
-        </nav>
+        <%= render BlogWeb.SharedView, "_menu.html", assigns %>
     </header>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>

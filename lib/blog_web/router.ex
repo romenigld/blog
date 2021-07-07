@@ -7,6 +7,7 @@ defmodule BlogWeb.Router do
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug BlogWeb.Plug.SetUser
   end
 
   # coveralls-ignore-start
@@ -22,6 +23,14 @@ defmodule BlogWeb.Router do
     resources "/posts", PostController
 
     get "/", PageController, :index
+  end
+
+  scope "/auth", BlogWeb do
+    pipe_through :browser
+
+    get "/logout", AuthController, :logout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
   end
 
   # Other scopes may use custom stacks.

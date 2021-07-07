@@ -14,8 +14,12 @@ import {Socket} from "phoenix"
 import socket from "./socket"
 import "phoenix_html"
 
-// Initialization of the Materialize Component - 'Floating Action Button'
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
+  // Initialization of the Materialize Component - 'Floating Action Button'
   var elems = document.querySelectorAll('.fixed-action-btn');
   M.FloatingActionButton.init(elems, {});
+
+  // Initialization of the Materialize plugin 'sidenav-trigger' into your navbar
+  var elems = document.querySelectorAll('.sidenav');
+  M.Sidenav.init(elems, {});
 });

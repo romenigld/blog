@@ -8,7 +8,9 @@ defmodule BlogWebChannelTest do
   }
 
   setup do
-    {:ok, post} = Blog.Posts.create_post(@valid_post)
+    user = Blog.Accounts.get_user!(1)
+
+    {:ok, post} = Blog.Posts.create_post(user, @valid_post)
     {:ok, socket} = connect(UserSocket, %{})
 
     {:ok, socket: socket, post: post}
