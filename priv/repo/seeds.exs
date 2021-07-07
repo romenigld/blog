@@ -15,19 +15,23 @@ alias Blog.{Accounts, Accounts.User, Posts, Posts.Post}
 user = %{
   email: "romenigld@gmail.com",
   first_name: nil,
-  image: "https://lh3.googleusercontent.com/a-/AOh14Gi_DLWmmTSrpYkjR3vA-SUL70fsisqN72pkkJEjcw=s96-c",
+  image:
+    "https://lh3.googleusercontent.com/a-/AOh14Gi_DLWmmTSrpYkjR3vA-SUL70fsisqN72pkkJEjcw=s96-c",
   last_name: nil,
   provider: "google",
-  token: "ya29.a0ARrdaM_-pRbeHzYDbWaxj1pEfHQv899wlPGzodIaarwIbwQDHZShkG6BRlPodikJWqKFJkjtXmhk8OuUyWKBSW62PTN9vhpDEUYBFdVcREi-ZfcURN9XHDfEpNoifG0-FZF76IAs3Jgl-bVjZJlTWtffexGZFQ"
+  token:
+    "ya29.a0ARrdaM_-pRbeHzYDbWaxj1pEfHQv899wlPGzodIaarwIbwQDHZShkG6BRlPodikJWqKFJkjtXmhk8OuUyWKBSW62PTN9vhpDEUYBFdVcREi-ZfcURN9XHDfEpNoifG0-FZF76IAs3Jgl-bVjZJlTWtffexGZFQ"
 }
 
 user_2 = %{
   email: "minho@gmail.com",
   first_name: nil,
-  image: "https://lh3.minho_teste.com/a-/AOh14Gi_DLWmmTSrpYkjR3vA-SUL70fsisqN72pkkJEjcw=minho_teste",
+  image:
+    "https://lh3.minho_teste.com/a-/AOh14Gi_DLWmmTSrpYkjR3vA-SUL70fsisqN72pkkJEjcw=minho_teste",
   last_name: nil,
   provider: "google",
-  token: "ya29.minho_teste_-pRbeHzYDbWaxj1pEfHQv899wlPGzodIaarwIbwQDHZShkG6BRlPodikJWqKFJkjtXmhk8OuUyWKBSW62PTN9vhpDEUYBFdVcREi-ZfcURN9XHDfEpNoifG0-FZF76IAs3Jgl-bVjZJlTWtffexGZFQ"
+  token:
+    "ya29.minho_teste_-pRbeHzYDbWaxj1pEfHQv899wlPGzodIaarwIbwQDHZShkG6BRlPodikJWqKFJkjtXmhk8OuUyWKBSW62PTN9vhpDEUYBFdVcREi-ZfcURN9XHDfEpNoifG0-FZF76IAs3Jgl-bVjZJlTWtffexGZFQ"
 }
 
 post = %{
