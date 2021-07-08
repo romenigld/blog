@@ -32,8 +32,7 @@ defmodule BlogWeb.PostControllerTest do
       |> get(Routes.post_path(conn, :new))
 
     assert redirected_to(conn) == Routes.page_path(conn, :index)
-
-    conn = get(conn, Routes.post_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :index))
     assert html_response(conn, 200) =~ "Você precisa estar logado!!!"
   end
 
@@ -43,7 +42,7 @@ defmodule BlogWeb.PostControllerTest do
       |> get(Routes.post_path(conn, :new))
 
     assert redirected_to(conn) == Routes.page_path(conn, :index)
-    conn = get(conn, Routes.post_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :index))
     assert html_response(conn, 200) =~ "Você precisa estar logado!!!"
   end
 
@@ -75,7 +74,12 @@ defmodule BlogWeb.PostControllerTest do
     test "listar todos os posts", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       Blog.Posts.create_post(user, @valid_post)
-      conn = get(conn, Routes.post_path(conn, :index))
+
+      conn =
+        conn
+        |> Plug.Test.init_test_session(user_id: user.id)
+        |> get(Routes.post_path(conn, :index))
+
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
@@ -113,7 +117,9 @@ defmodule BlogWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "Você não tem permissão para esta operação!"
     end
 
-    test "deve lançar erro ao entrar no formulário de alteração de posts sendo outro usuário", %{conn: conn} do
+    test "deve lançar erro ao entrar no formulário de alteração de posts sendo outro usuário", %{
+      conn: conn
+    } do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 
