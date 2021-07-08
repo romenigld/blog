@@ -73,11 +73,14 @@ const createSocket = (post_id) => {
 
   channel.on(`comments:${post_id}:new`, incluirComentario)
 
-  document.getElementById("btn-comentar").addEventListener("click", () => {
-    const content = document.getElementById("comentario").value
-    channel.push("comment:add", {content: content})
-    document.getElementById("comentario").value = ""
-  });
+  if (window.userToken) {
+    document.getElementById("btn-comentar").addEventListener("click", () => {
+      const content = document.getElementById("comentario").value
+      channel.push("comment:add", { content: content })
+      document.getElementById("comentario").value = ""
+    });
+  }
+
 }
 
 function pegaComentarios(comentarios) {
