@@ -79,14 +79,14 @@ defmodule BlogWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
-    test "pegar um post por id", %{conn: conn, post: post} do
+    test "pegar um post por id", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
       conn = get(conn, Routes.post_path(conn, :show, post))
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
-    test "entrar no formulário de alteração de posts", %{conn: conn, post: post} do
+    test "entrar no formulário de alteração de posts", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 
@@ -99,7 +99,7 @@ defmodule BlogWeb.PostControllerTest do
     end
 
     test "deve mostrar erro quando entrar no formulário de alteração de posts com outro usuario",
-         %{conn: conn, post: post} do
+         %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 
@@ -113,10 +113,7 @@ defmodule BlogWeb.PostControllerTest do
       assert html_response(conn, 200) =~ "Você não tem permissão para esta operação!"
     end
 
-    test "deve lançar erro ao entrar no formulário de alteração de posts sendo outro usuário", %{
-      conn: conn,
-      post: post
-    } do
+    test "deve lançar erro ao entrar no formulário de alteração de posts sendo outro usuário", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 

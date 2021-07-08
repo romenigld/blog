@@ -4,8 +4,6 @@ defmodule BlogWeb.CommentsChannel do
   def join("comments:" <> post_id, payload, socket) do
     post = Blog.Posts.get_post_with_comments!(post_id)
 
-    IO.inspect post
-
     {:ok, %{comments: post.comments}, assign(socket, :post_id, post.id)}
   end
 
