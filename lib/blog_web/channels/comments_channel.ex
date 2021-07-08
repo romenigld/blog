@@ -3,6 +3,9 @@ defmodule BlogWeb.CommentsChannel do
 
   def join("comments:" <> post_id, payload, socket) do
     post = Blog.Posts.get_post_with_comments!(post_id)
+
+    IO.inspect post
+
     {:ok, %{comments: post.comments}, assign(socket, :post_id, post.id)}
   end
 
@@ -11,7 +14,6 @@ defmodule BlogWeb.CommentsChannel do
       socket.assigns.post_id
       |> Blog.Comments.create_comment(socket.assigns.user_id, content)
 
-    IO.inspect response, label: "RESPONSE"
     case response do
       {:ok, comment} ->
         broadcast!(socket, "comments:#{socket.assigns.post_id}:new", %{comment: comment})

@@ -21,11 +21,8 @@ defmodule BlogWeb.UserSocket do
       {:ok, user_id} ->
         {:ok, assign(socket, :user_id, user_id)}
 
-      {:error, _} ->
-        :error
+      {:error, _} -> :error
     end
-
-    {:ok, socket}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
