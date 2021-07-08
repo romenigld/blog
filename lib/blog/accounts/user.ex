@@ -11,6 +11,7 @@ defmodule Blog.Accounts.User do
     field :token, :string
 
     has_many :posts, Blog.Posts.Post
+    has_many :comments, Blog.Comments.Comment
     timestamps()
   end
 

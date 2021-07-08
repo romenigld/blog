@@ -7,6 +7,7 @@ defmodule Blog.Comments.Comment do
     field :content, :string
 
     belongs_to :post, Blog.Posts.Post
+    belongs_to :user, Blog.Accounts.User
     timestamps()
   end
 
