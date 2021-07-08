@@ -32,8 +32,7 @@ defmodule BlogWeb.PostControllerTest do
       |> get(Routes.post_path(conn, :new))
 
     assert redirected_to(conn) == Routes.page_path(conn, :index)
-
-    conn = get(conn, Routes.post_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :index))
     assert html_response(conn, 200) =~ "Você precisa estar logado!!!"
   end
 
@@ -43,7 +42,7 @@ defmodule BlogWeb.PostControllerTest do
       |> get(Routes.post_path(conn, :new))
 
     assert redirected_to(conn) == Routes.page_path(conn, :index)
-    conn = get(conn, Routes.post_path(conn, :index))
+    conn = get(conn, Routes.page_path(conn, :index))
     assert html_response(conn, 200) =~ "Você precisa estar logado!!!"
   end
 
@@ -75,18 +74,23 @@ defmodule BlogWeb.PostControllerTest do
     test "listar todos os posts", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       Blog.Posts.create_post(user, @valid_post)
-      conn = get(conn, Routes.post_path(conn, :index))
+
+      conn =
+        conn
+        |> Plug.Test.init_test_session(user_id: user.id)
+        |> get(Routes.post_path(conn, :index))
+
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
-    test "pegar um post por id", %{conn: conn, post: post} do
+    test "pegar um post por id", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
       conn = get(conn, Routes.post_path(conn, :show, post))
       assert html_response(conn, 200) =~ "Phoenix Framework"
     end
 
-    test "entrar no formulário de alteração de posts", %{conn: conn, post: post} do
+    test "entrar no formulário de alteração de posts", %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 
@@ -99,7 +103,7 @@ defmodule BlogWeb.PostControllerTest do
     end
 
     test "deve mostrar erro quando entrar no formulário de alteração de posts com outro usuario",
-         %{conn: conn, post: post} do
+         %{conn: conn} do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)
 
@@ -114,8 +118,7 @@ defmodule BlogWeb.PostControllerTest do
     end
 
     test "deve lançar erro ao entrar no formulário de alteração de posts sendo outro usuário", %{
-      conn: conn,
-      post: post
+      conn: conn
     } do
       user = Blog.Accounts.get_user!(1)
       {:ok, post} = Blog.Posts.create_post(user, @valid_post)

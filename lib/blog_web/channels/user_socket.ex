@@ -24,8 +24,6 @@ defmodule BlogWeb.UserSocket do
       {:error, _} ->
         :error
     end
-
-    {:ok, socket}
   end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
