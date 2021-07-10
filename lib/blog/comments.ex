@@ -54,7 +54,11 @@ defmodule Blog.Comments do
     |> Ecto.build_assoc(:comments, user_id: user_id)
     |> change_comment(attrs)
     |> Repo.insert()
+    |> create_response_comment()
   end
+
+  def create_response_comment({:ok, comment}), do: {:ok, comment |> Repo.preload(:user) }
+  def create_response_comment({:error, _} =  error), do: error
 
   @doc """
   Updates a comment.

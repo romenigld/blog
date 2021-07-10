@@ -14,6 +14,7 @@ defmodule BlogWeb.CommentsChannel do
 
     case response do
       {:ok, comment} ->
+        # IO.inspect comment, label: "Commentario"
         broadcast!(socket, "comments:#{socket.assigns.post_id}:new", %{comment: comment})
         {:reply, :ok, socket}
 
